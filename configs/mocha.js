@@ -1,6 +1,5 @@
 module.exports = {
-  spec: ["src/test/*.test.js"],
-  require: "@babel/register",
+  spec: ["dist/test/*.test.js"],
   reporter: "mocha-multi-reporters",
   ["reporter-options"]: "configFile=./configs/multi.reporter.config.json"
 };

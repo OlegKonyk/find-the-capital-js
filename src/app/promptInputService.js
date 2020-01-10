@@ -5,12 +5,8 @@ export class PromptInputService {
   constructor() {}
 
   init() {
-    console.log(`
-
-            ########## FIND THE CAPITAL ##########
-
-        `);
-
+    console.log(`\n############## FIND THE CAPITAL #############\n`);
+    
     return this.askForCountry()
       .then(responses => {
         return this.findCapital(responses);
@@ -24,11 +20,7 @@ export class PromptInputService {
   }
 
   exit() {
-    console.log(`
-        
-            ########## EXITING THE APPLICATION ##########
-        
-        `);
+    console.log(`\n########## EXITING THE APPLICATION ##########\n`);
     process.exit(0);
   }
 
@@ -49,7 +41,7 @@ export class PromptInputService {
           countryData = response.data;
         }
         console.log(
-          `SUCCESS: Capital of ${country} is ${countryData.capital}.`
+          `> Capital of ${country} is ${countryData.capital}.`
         );
       });
   }
@@ -66,18 +58,15 @@ export class PromptInputService {
         ]
       })
       .then(({ searchType }) => {
-        const examples = {
-          name: ["Unites States of America", "Ukraine", "etc"],
-          alpha: ["US", "USA", "UA", "UKR", "etc"]
+        const readableSearchType = {
+            name: 'name',
+            alpha: 'code'
         };
-
         return inquirer
           .prompt({
             type: "input",
             name: "country",
-            message: `Enter country's ${searchType}. Ex: ${examples[
-              searchType
-            ].join(", ")}.`
+            message: `Enter country's ${readableSearchType[searchType]}`
           })
           .then(({ country }) => {
             return { country, searchType };
