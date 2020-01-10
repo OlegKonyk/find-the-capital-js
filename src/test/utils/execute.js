@@ -5,10 +5,6 @@ const DOWN = '\x1B\x5B\x42';
 const UP = '\x1B\x5B\x41';
 const ENTER = '\x0D';
 
-function startProcess() {
-  
-}
-
 function execute(
     processPath,
     args = [],

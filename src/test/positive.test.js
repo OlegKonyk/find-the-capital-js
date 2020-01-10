@@ -1,9 +1,9 @@
 import { assert } from "chai";
-import { execute, DOWN, UP, ENTER } from './utils/execute';
+import { execute, DOWN, ENTER } from './utils/execute';
 
-describe('Single country by name', function() {
+describe('Single country by name', function () {
   this.timeout(10000);
-  before(async function() {
+  before(async function () {
     this.response = await execute(
       'dist/app/index.js',
       [],
@@ -15,20 +15,20 @@ describe('Single country by name', function() {
         ENTER
       ]
     );
-    
+
     return this.response;
   })
 
-  it("true is true", function() {
+  it("true is true", function () {
     console.log(this.response);
     assert.isTrue(true);
   });
 
 });
 
-describe('Single country by code', function() {
+describe('Single country by code', function () {
   this.timeout(10000);
-  before(async function() {
+  before(async function () {
     this.response = await execute(
       'dist/app/index.js',
       [],
@@ -41,11 +41,11 @@ describe('Single country by code', function() {
         ENTER
       ]
     );
-    
+
     return this.response;
   })
 
-  it("true is true", function() {
+  it("true is true", function () {
     console.log(this.response);
     assert.isTrue(true);
   });
@@ -53,9 +53,9 @@ describe('Single country by code', function() {
 });
 
 
-describe('Two countries: 1st - name, 2nd - code', function() {
+describe('Two countries: 1st - name, 2nd - code', function () {
   this.timeout(15000);
-  before(async function() {
+  before(async function () {
     this.response = await execute(
       'dist/app/index.js',
       [],
@@ -73,11 +73,11 @@ describe('Two countries: 1st - name, 2nd - code', function() {
         ENTER
       ]
     );
-    
+
     return this.response;
   })
 
-  it("true is true", function() {
+  it("true is true", function () {
     console.log(this.response);
     assert.isTrue(true);
   });
