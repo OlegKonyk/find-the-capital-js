@@ -68,14 +68,26 @@ Command line tool that allows user to get capital of any country based on full c
 
 [running_e2e_tests]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/running_e2e_tests.gif
 
-#### Test coverage
+See HTML report in `./test-results/mochawesome/mochawesome.html`
+
+#### Test coverage (#test-coverage)
+
+##### Implemented
 
     - positive search
-        1.
-        2.
-        3.
+        1. search for single valid country name and code
+        2. searching for multiple valid countries on same process
 
     - negative search
-        1.
-        2.
-        3.
+        1. search for non-existing country name and code
+        2. searching for multiple non-existing countries on same process
+
+    - input validation
+        1. error handling for country names and codes containing integers
+        2. error handling for country codes that are not alpha-2 & alpha-3 compatible
+
+##### TODO
+    
+    1. mock REST APIs to validate upstream failures
+    2. implement dynamic/data driven tests
+    3. add tests for rest of stdout strings
