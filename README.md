@@ -67,3 +67,15 @@ Command line tool that allows user to get capital of any country based on full c
 ![running_e2e_tests]
 
 [running_e2e_tests]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/running_e2e_tests.gif
+
+#### Test coverage
+
+    - positive search
+        1.
+        2.
+        3.
+
+    - negative search
+        1.
+        2.
+        3.
