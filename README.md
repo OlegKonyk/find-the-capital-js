@@ -2,6 +2,21 @@
 
 Command line tool that allows user to get capital of any country based on full country name or ISO 3166 country codes (alpha-2 & alpha-3) based on [REST COUNTRIES](https://restcountries.eu/#rest-countries).
 
+## Contents
+
+[Setup local dev environment](#setup-local-dev-environment)
+
+[Project structure](#project-structure)
+
+[Application usage happy flows](#application-usage-happy-flows)
+
+[Test coverage](#test-coverage)
+
+-   [Implemented](#implemented)
+-   [TODO](#todo)
+-   [Test execution](#test-execution)
+-   [Continuous integration](#continuous-integration)
+
 ## Setup local dev environment:
 
 1. Clone the repository:
@@ -67,9 +82,7 @@ Command line tool that allows user to get capital of any country based on full c
     - Message with country's capital will be returned
     - Select 'Continue' to make another query or 'Exit' to terminate the application
 
-![usage_positive]
-
-[usage_positive]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/usage_positive.gif
+![usage_positive](https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/usage_positive.gif)
 
 ## Test coverage
 
@@ -99,15 +112,11 @@ Command line tool that allows user to get capital of any country based on full c
     npm test
 ```
 
-![running_e2e_tests]
-
-[running_e2e_tests]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/running_e2e_tests.gif
+![running_e2e_tests](https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/running_e2e_tests.gif)
 
 See HTML report in `./test-results/mochawesome/mochawesome.html`
 
-![report_sample]
-
-[report_sample]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/report_sample.png
+![report_sample](https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/report_sample.png)
 
 ### Continuous integration
 
@@ -115,6 +124,4 @@ Simple [CI pipeline](https://github.com/OlegKonyk/find-the-capital-js/actions) s
 
 Project is being built and tested on every commit.
 
-![git_workflow]
-
-[git_workflow]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/git_workflow.png
+![git_workflow](https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/git_workflow.png)
