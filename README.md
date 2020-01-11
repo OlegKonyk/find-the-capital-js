@@ -94,3 +94,13 @@ See HTML report in `./test-results/mochawesome/mochawesome.html`
 ![report_sample]
 
 [report_sample]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/report_sample.png
+
+#### Continuous integration
+
+Simple [CI pipeline](https://github.com/OlegKonyk/find-the-capital-js/actions) setup with GIT Workflow.
+
+Project is being built and tested on every commit.
+
+![git_workflow]
+
+[git_workflow]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/git_workflow.png
