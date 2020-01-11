@@ -1,8 +1,8 @@
 # Find the Capital CLI
 
-Command line tool that allows user to get capital of any country based on full country name or ISO 3166 country codes (alpha-2 & alpha-3);
+Command line tool that allows user to get capital of any country based on full country name or ISO 3166 country codes (alpha-2 & alpha-3) based on [REST COUNTRIES](https://restcountries.eu/#rest-countries).
 
-### Setup local dev environment:
+## Setup local dev environment:
 
 1. Clone the repository:
 
@@ -12,36 +12,50 @@ Command line tool that allows user to get capital of any country based on full c
     ```
 
 2. Make sure nodejs > v10 is installed:
+
     ```
         node --version
-    ``` 
+    ```
 
     See [nodejs.org](https://nodejs.org/) for installation instructions.
 
 3. Install projects dependencies:
+
     ```
         npm install
     ```
 
-4. Start the app in dev mode: 
+4. Start the app in dev mode:
+
     ```
-        npm run dev:start 
+        npm run dev:start
     ```
 
 5. Run end to end tests:
     ```
-        npm test 
+        npm test
     ```
 
-### Application usage flows:
+## Project structure:
 
-#### Positive
+```
+├── configs        // mocha configs
+├── dist           // transpiled files [temp]
+├── images         // documentation resources
+├── node_modules   // nodejs dependencies
+├── src
+│   ├── app
+│   └── test
+└── test-results   // HTML results [temp]
+```
+
+## Application usage happy flows:
 
 1. Search by country name
 
     - Start the app
     - Select 'Name' option using arrow keys
-    - Enter valid country name. Ex. Unites States of America, Mexico, Ukraine 
+    - Enter valid country name. Ex. Unites States of America, Mexico, Ukraine
     - Message with country's capital will be returned
     - Select 'Continue' to make another query or 'Exit' to terminate the application
 
@@ -55,11 +69,11 @@ Command line tool that allows user to get capital of any country based on full c
 
 ![usage_positive]
 
-[usage_positive]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/usage_positive.gif 
+[usage_positive]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/usage_positive.gif
 
-### Test coverage
+## Test coverage
 
-#### Implemented
+### Implemented
 
     - positive search
         1. search for single valid country name and code
@@ -73,16 +87,16 @@ Command line tool that allows user to get capital of any country based on full c
         1. error handling for country names and codes containing integers
         2. error handling for country codes that are not alpha-2 & alpha-3 compatible
 
-#### TODO
-    
+### TODO
+
     1. mock REST APIs to validate upstream failures
     2. implement dynamic/data driven tests
     3. add tests for rest of stdout strings
 
-#### Test execution
-    
+### Test execution
+
 ```
-    npm test 
+    npm test
 ```
 
 ![running_e2e_tests]
@@ -95,7 +109,7 @@ See HTML report in `./test-results/mochawesome/mochawesome.html`
 
 [report_sample]: https://raw.githubusercontent.com/OlegKonyk/find-the-capital-js/master/images/report_sample.png
 
-#### Continuous integration
+### Continuous integration
 
 Simple [CI pipeline](https://github.com/OlegKonyk/find-the-capital-js/actions) setup with GIT Workflow.
 
