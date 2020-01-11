@@ -1,5 +1,8 @@
-import { PromptInputService } from "./promptInputService";
+/**
+ * index.js is the main file of CLI application.
+ * Command line prompt is being initiated on file load.
+ */
 
-const promptInputService = new PromptInputService();
+import { PromptInputService } from './promptInputService';
 
-promptInputService.init();
+new PromptInputService().init();

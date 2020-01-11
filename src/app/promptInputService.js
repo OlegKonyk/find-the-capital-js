@@ -1,14 +1,20 @@
-import inquirer from "inquirer";
-import axios from "axios";
+import inquirer from 'inquirer';
+import axios from 'axios';
 
-const API = 'https://restcountries.eu/rest/v2';
+import { api, markup, questions, countryInputValidator } from './utils';
 
+/**
+ * Service handling user interactions via CLI
+ * Allows user to: select search mode (country name or country code),
+ * enter the value, receive the capital name and chose to repeat actions or exit the app.
+ */
 export class PromptInputService {
-    constructor() { }
-
+    /**
+     * Starts the prompt and defines the sequence of app flow.
+     * @return {Promise}
+     */
     init() {
-        console.log(`\n############## FIND THE CAPITAL #############\n`);
-
+        console.log(markup.start);
         return this.askForCountry()
             .then(responses => {
                 return this.findCapital(responses);
@@ -17,74 +23,69 @@ export class PromptInputService {
                 return this.askForNextStep();
             })
             .catch(err => {
-                console.log("!! ERROR: Something went wrong", err);
-                console.log(`\n############# APPLICATION CRASHED ###########\n`);
-                process.exit(1);
+                throw err;
             });
     }
 
+    /**
+     * Terminates the application with Success status.
+     */
     exit() {
-        console.log(`\n########## EXITING THE APPLICATION ##########\n`);
+        console.log(markup.exit);
         process.exit(0);
     }
 
+    /*
+     * Makes a request for country data based on user's query
+     *
+     * @param {Object} input Aggregated user input from previous questions.
+     * @param {string} input.country The name of the user.
+     * @param {string} input.searchType The email of the user.
+     * @return {Promise<{ capital: String }>} API response.
+     */
     findCapital({ country, searchType }) {
         return axios
-            .get(`${API}/${searchType}/${country}?fullText=true&fields=capital`)
+            .get(`${api}/${searchType}/${country}?fullText=true&fields=capital`)
             .then(response => {
-                let countryData = response.data[0] || response.data;
-
-                console.log(
-                    `>> Capital of ${country} is ${countryData.capital}.`
-                );
+                const countryData = response.data[0] || response.data;
+                console.log(`>> Capital of ${country} is ${countryData.capital}.`);
+                return countryData;
             })
             .catch(err => {
-                console.log(`>> ERROR: status ${err.response.data.status} - ${err.response.data.message} for input: ${country}`);
+                const { status, message } = err.response.data;
+                console.log(`>> ERROR: status ${status} - ${message} for input: ${country}`);
             });
     }
 
+    /*
+     * Asks user to input search type and country value
+     *
+     * @return {Promise<{ country: String, searchType: String }>} aggregated user input.
+     */
     askForCountry() {
         return inquirer
             .prompt({
-                type: "list",
-                name: "searchType",
-                message: "Are we searching by country name or country code?",
+                type: 'list',
+                name: 'searchType',
+                message: questions.askForCountry,
                 choices: [
-                    { name: "Name", value: "name" },
-                    { name: "Code", value: "alpha" }
-                ]
+                    { name: 'Name', value: 'name' },
+                    { name: 'Code', value: 'alpha' },
+                ],
             })
             .then(({ searchType }) => {
                 const readableSearchType = {
                     name: 'name',
-                    alpha: 'code'
+                    alpha: 'code',
                 };
                 return inquirer
                     .prompt({
-                        type: "input",
-                        name: "country",
+                        type: 'input',
+                        name: 'country',
                         message: `Enter country's ${readableSearchType[searchType]}`,
-                        validate: (input) => {
-                            console.log("input", input)
-                            const validators = {
-                                name: { 
-                                    reg: /^[a-zA-Z\s]*$/,
-                                    msg: `only characters and white space allowed; value entered: ${input}`
-                                },
-                                alpha:{
-                                    reg: /^[a-zA-Z]{2,3}$/,
-                                    msg: `only 2 or 3 characters and allowed; value entered: ${input}`
-                                }
-                            };
-                            return new Promise((resolve, reject) => {
-                                if (input.match(validators[searchType].reg)) {
-                                    resolve(true);
-                                } else (
-                                    reject(`BAD INPUT: ${validators[searchType].msg} <<`)
-                                )
-                                
-                            })
-                        }
+                        validate: input => {
+                            return countryInputValidator(input, searchType);
+                        },
                     })
                     .then(({ country }) => {
                         return { country, searchType };
@@ -92,16 +93,20 @@ export class PromptInputService {
             });
     }
 
+    /*
+     * Asks user to repeat the query flow or exit the application
+     * @return {Promise}
+     */
     askForNextStep() {
         return inquirer
             .prompt({
-                type: "list",
-                name: "next",
-                message: "Do you want to do more queries?",
+                type: 'list',
+                name: 'next',
+                message: questions.askForNextStep,
                 choices: [
-                    { name: "Continue", value: true },
-                    { name: "Exit", value: false }
-                ]
+                    { name: 'Continue', value: true },
+                    { name: 'Exit', value: false },
+                ],
             })
             .then(({ next }) => {
                 if (next) {
